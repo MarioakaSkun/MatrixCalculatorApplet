@@ -54,7 +54,7 @@ public class MatrixDisplayDialog extends Dialog {
             int x = PADDING + SPACE_WIDTH;
 
             for(int column = 0; column < matrix.getColumns(); ++column) {
-                String value = String.valueOf(array[row][column]);
+                String value = stringRepresentation(array[row][column]);
                 g.drawString(value, x, y);
 
                 x += columnsWidth[column] + SPACE_WIDTH;
@@ -84,7 +84,7 @@ public class MatrixDisplayDialog extends Dialog {
             int widestInColumn = 0;
 
             for(int row = 0; row < matrix.getRows(); ++row) {
-                String value = String.valueOf(array[row][column]);
+                String value = stringRepresentation(array[row][column]);
                 int width = getFontMetrics(FONT).stringWidth(value);
 
                 if(width > widestInColumn)
@@ -95,5 +95,14 @@ public class MatrixDisplayDialog extends Dialog {
         }
 
         return columnsWidth;
+    }
+
+    private String stringRepresentation(double value) {
+        String representation = String.valueOf(value);
+
+        if(value - (int)value == 0)
+            representation = representation.substring(0, representation.indexOf('.'));
+
+        return representation;
     }
 }

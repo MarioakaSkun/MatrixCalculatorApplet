@@ -12,7 +12,7 @@ public class InvalidMatrixInputException extends Exception {
         if(needed > received)
             return "Too few numbers: need " + needed + ", received " + received + ".";
         else
-            return "ExpressionParser.Matrix numbers are not clear: need " + needed + ", received " + received + ".";
+            return "Matrix numbers are not clear: need " + needed + ", received " + received + ".";
     }
 
 }

@@ -17,8 +17,7 @@ public class MatrixCalculator {
         for (String token : tokens) {
             if (Parser.isWord(token)) {
                 if(applet.isAlreadyOnList(token)) {
-                    MatrixContainer matrix = new MatrixContainer(token, applet.getArrayFromName(token));
-                    matricesStack.push(matrix);
+                    matricesStack.push(applet.getMatrixByName(token));
                 }
                 else
                     throw new InvalidMatrixCommandException("Invalid matrix name: " + token);

@@ -168,6 +168,9 @@ public class Main extends Applet {
 
         MatrixContainer matrix = matricesContainer.get(index);
 
+        if(matrix.isNumberOnly())
+            return;
+
         MatrixDisplayDialog dialog = new MatrixDisplayDialog(matrix);
         dialog.setVisible(true);
     }
