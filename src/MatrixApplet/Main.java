@@ -139,6 +139,12 @@ public class Main extends Applet {
 
     private void calculateExpression() {
         String expression = commandLine.getText();
+
+        if(expression.isEmpty()) {
+            setErrorMessage("The expression is empty!");
+            return;
+        }
+
         String rpnExpression = Parser.parse(expression);
 
         try {
@@ -214,15 +220,6 @@ public class Main extends Applet {
 
     public Insets getInsets() {
         return new Insets(PADDING, PADDING, PADDING, PADDING);
-    }
-
-    public double[][] getArrayFromName(String name) {
-        for(MatrixContainer matrix : matricesContainer) {
-            if (matrix.getName().equals(name))
-                return matrix.getArray();
-        }
-
-        return null;
     }
 }
 

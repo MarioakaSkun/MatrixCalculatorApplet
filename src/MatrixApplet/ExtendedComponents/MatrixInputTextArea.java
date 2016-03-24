@@ -29,6 +29,8 @@ public class MatrixInputTextArea extends TextArea {
 
         String currentText = getText();
         String text = Parser.removeAllMultipleWhitespaces(currentText);
+        text = text.replaceAll(",", ".");
+
         String[] strNumbers = text.split(" ");
 
         int fields = rows*columns;

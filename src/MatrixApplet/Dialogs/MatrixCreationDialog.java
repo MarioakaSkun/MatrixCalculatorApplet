@@ -164,7 +164,7 @@ public class MatrixCreationDialog extends Dialog implements ActionListener {
             return;
 
         g.setColor(Color.red);
-        g.drawString(errorMessage, 10, getHeight() - 12);
+        g.drawString(errorMessage, g.getFontMetrics().getHeight(), getHeight() - g.getFontMetrics().getHeight());
     }
 }
 
