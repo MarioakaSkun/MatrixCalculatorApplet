@@ -8,7 +8,6 @@ import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import ExpressionParser.InvalidMatrixCommandException;
 import MatrixApplet.Dialogs.MatrixCreationDialog;
@@ -16,7 +15,7 @@ import MatrixApplet.Dialogs.MatrixDisplayDialog;
 import MatrixApplet.Dialogs.NewMatrixNameDialog;
 
 /*
-    <applet code="Matrix Solver" width=400 height=300> </applet>
+<applet code="Matrix Solver" width=400 height=300> </applet>
 */
 
 public class Main extends Applet {
@@ -25,8 +24,8 @@ public class Main extends Applet {
     private String errorMessage = "";
 
     private List listOfMatrices;
-    private Button functionButtons[] = new Button[4];
     private TextField commandLine;
+    private Button functionButtons[] = new Button[4];
 
     private GridBagConstraints gbc;
 
@@ -135,8 +134,7 @@ public class Main extends Applet {
         if(listOfMatrices.getSelectedIndex() == -1)
             return;
 
-        String name = getPlainName(listOfMatrices.getSelectedItem());
-        removeFromList(name);
+        removeCurrentFromList();
     }
 
     private void calculateExpression() {
@@ -171,36 +169,19 @@ public class Main extends Applet {
         MatrixContainer matrix = matricesContainer.get(index);
 
         MatrixDisplayDialog dialog = new MatrixDisplayDialog(matrix);
-        dialog.setModal(true);
         dialog.setVisible(true);
-    }
-
-    private String getPlainName(String name) {
-        int index = name.indexOf('(');
-
-        if(index == -1)
-            index = name.indexOf('=');
-
-        return name.substring(0, index);
-    }
-
-    public void addToList(String name, double[][] array) {
-        MatrixContainer matrix = new MatrixContainer(name, array);
-        matricesContainer.add(matrix);
-        listOfMatrices.add(name + "(" + array.length + "x" + array[0].length + ")");
     }
 
     public void addToList(MatrixContainer matrix) {
         matricesContainer.add(matrix);
 
         if(matrix.isNumberOnly())
-            listOfMatrices.add(matrix.getName() + "=" + (matrix.getArray())[0][0]);
+            listOfMatrices.add(matrix.getName() + " = " + (matrix.getArray())[0][0]);
         else
-            listOfMatrices.add(matrix.getName() + "(" + matrix.getRows() + "x" + matrix.getColumns() + ")");
-
+            listOfMatrices.add(matrix.getName() + " (" + matrix.getRows() + "x" + matrix.getColumns() + ")");
     }
 
-    public void removeFromList(String name) {
+    public void removeCurrentFromList() {
         int index = listOfMatrices.getSelectedIndex();
 
         if(index == -1)
@@ -211,14 +192,21 @@ public class Main extends Applet {
     }
 
     public boolean isAlreadyOnList(String name) {
-        for(int i=0; i<matricesContainer.size(); ++i)
-        {
-            MatrixContainer matrix = matricesContainer.get(i);
-            if(matrix.getName().equals(name))
+        for(MatrixContainer matrix : matricesContainer) {
+            if (matrix.getName().equals(name))
                 return true;
         }
 
         return false;
+    }
+
+    public MatrixContainer getMatrixByName(String name) {
+        for(MatrixContainer matrix : matricesContainer) {
+            if (matrix.getName().equals(name))
+                return matrix;
+        }
+
+        return null;
     }
 
     public Insets getInsets() {
@@ -226,10 +214,8 @@ public class Main extends Applet {
     }
 
     public double[][] getArrayFromName(String name) {
-        for(int i=0; i<matricesContainer.size(); ++i)
-        {
-            MatrixContainer matrix = matricesContainer.get(i);
-            if(matrix.getName().equals(name))
+        for(MatrixContainer matrix : matricesContainer) {
+            if (matrix.getName().equals(name))
                 return matrix.getArray();
         }
 

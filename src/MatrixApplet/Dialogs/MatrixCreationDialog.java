@@ -1,5 +1,6 @@
 package MatrixApplet.Dialogs;
 
+import ExpressionParser.MatrixContainer;
 import MatrixApplet.ExtendedComponents.LimitedTextField;
 import MatrixApplet.ExtendedComponents.NumericTextField;
 import MatrixApplet.ExtendedComponents.MatrixInputTextArea;
@@ -154,7 +155,7 @@ public class MatrixCreationDialog extends Dialog implements ActionListener {
             return;
         }
 
-        parentWindow.addToList(name, array);
+        parentWindow.addToList(new MatrixContainer(name, array));
         dispose();
     }
 

@@ -1,5 +1,7 @@
 package MatrixApplet;
 
+import ExpressionParser.MatrixContainer;
+
 public class MatricesAdder {
 
     Main parent;
@@ -57,14 +59,14 @@ public class MatricesAdder {
                 {0, 1, 0, 1, 0, 1, 0}
         };
 
-        parent.addToList("A", arrA);
-        parent.addToList("B", arrB);
-        parent.addToList("C", arrC);
-        parent.addToList("D", arrD);
-        parent.addToList("HDG", arrE);
-        parent.addToList("DEED", arrF);
-        parent.addToList("G", arrG);
-        parent.addToList("Z", arrH);
+        parent.addToList(new MatrixContainer("A", arrA));
+        parent.addToList(new MatrixContainer("B", arrB));
+        parent.addToList(new MatrixContainer("C", arrC));
+        parent.addToList(new MatrixContainer("D", arrD));
+        parent.addToList(new MatrixContainer("HDG", arrE));
+        parent.addToList(new MatrixContainer("DEED", arrF));
+        parent.addToList(new MatrixContainer("G", arrG));
+        parent.addToList(new MatrixContainer("Z", arrH));
     }
 
 
